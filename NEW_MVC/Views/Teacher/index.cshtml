@@ -1,0 +1,56 @@
+@model IEnumerable<NEW_MVC.Models.Teacher>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-8">
+            <h2 class="text-primary">Teacher List</h2>
+        </div>
+        <a asp-controller="Teacher" asp-action="Create" class="btn btn-primary">Create</a>
+
+    </div>
+    <br />
+
+    <form asp-controller="Teacher" asp-action="Index">
+     <p>
+
+         Name: <input type="text" name="SearchString" />
+         <input type="submit" value="Filter">
+     </p>
+
+
+    </form>
+
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Subject Name</th>
+                    <th>Syllabus</th>
+                    <th>Credits</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj1 in Model)
+                {
+                    <tr>
+                        <td width="50%">@obj1.Teacher_Name</td>
+                        <td>@obj1.Class</td>
+                        <td>@obj1.SubjectID</td>
+                        <td>
+                           <a asp-controller="Teacher" asp-action="Edit" asp-route-teacherid="@obj1.TeacherID" class="btn btn-primary">Edit</a>
+                            <a asp-controller="Teacher" asp-action="Delete" asp-route-teacherid="@obj1.TeacherID" class="btn btn-primary">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p> No subject details.</p>
+    }
+</div>
